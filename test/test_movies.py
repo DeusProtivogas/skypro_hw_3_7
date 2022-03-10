@@ -55,6 +55,7 @@ def movie_dao():
     movie_dao.create = MagicMock(return_value = Movie(id=4, title="m4"))
     movie_dao.delete = MagicMock(return_value = movies.pop(1))
     movie_dao.update = MagicMock()
+    movie_dao.partially_update = MagicMock()
 
     return movie_dao
 
@@ -91,3 +92,15 @@ class TestMovieService():
         }
         self.movie_service.update(movie_data)
 
+    def test_partially_update(self):
+        movie_data = {
+            "id": 2,
+            "title": "m2_new",
+            "description": "M2 DESCR_new",
+            "trailer": "tr2_new",
+            "year": 2022,
+            "rating": 2.6,
+            "genre_id": 2,
+            "director_id": 2,
+        }
+        self.movie_service.partially_update(movie_data)

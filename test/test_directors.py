@@ -37,6 +37,7 @@ def director_dao():
     director_dao.create = MagicMock(return_value = Director(id=4, name="d4"))
     director_dao.delete = MagicMock(return_value = directors.pop(1))
     director_dao.update = MagicMock()
+    director_dao.partially_update = MagicMock()
 
     return director_dao
 
@@ -67,3 +68,10 @@ class TestDirectorService():
         }
         self.director_service.update(director_data)
 
+
+    def test_partially_update(self):
+        director_data = {
+            "id": 2,
+            "name": "d2_new",
+        }
+        self.director_service.partially_update(director_data)

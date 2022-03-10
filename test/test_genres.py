@@ -32,11 +32,12 @@ def genre_dao():
         3: genre3
     }
 
-    genre_dao.get_one = MagicMock(return_value = genres.get(1))
-    genre_dao.get_all = MagicMock(return_value = [genre1, genre2, genre3])
+    genre_dao.get_one = MagicMock(return_value = genre1)
+    genre_dao.get_all = MagicMock(return_value=[genre1, genre2, genre3])
     genre_dao.create = MagicMock(return_value = Genre(id=4, name="g4"))
     genre_dao.delete = MagicMock(return_value = genres.pop(1))
     genre_dao.update = MagicMock()
+    genre_dao.partially_update = MagicMock()
 
     return genre_dao
 
@@ -66,4 +67,11 @@ class TestGenreService():
             "name": "g2_new",
         }
         self.genre_service.update(genre_data)
+
+    def test_partially_update(self):
+        genre_data = {
+            "id": 2,
+            "name": "g2_new",
+        }
+        self.genre_service.partially_update(genre_data)
 
